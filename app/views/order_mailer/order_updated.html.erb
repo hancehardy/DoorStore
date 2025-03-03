@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Order Update Notification</h1>
+    <p>Hello <%= @user.email %>,</p>
+    
+    <p>Your order #<%= @order.id %> has been updated.</p>
+
+    <h2>Order Details:</h2>
+    <ul>
+      <li>Status: <%= @order.status %></li>
+      <li>Total: $<%= @order.total_price %></li>
+      <% if @order.estimated_delivery_date %>
+        <li>Estimated Delivery: <%= @order.estimated_delivery_date.strftime("%B %d, %Y") %></li>
+      <% end %>
+    </ul>
+
+    <h3>Items:</h3>
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+      <% @order.line_items.each do |item| %>
+        <tr>
+          <td><%= item.product.name %></td>
+          <td><%= item.quantity %></td>
+          <td>$<%= item.total_price %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <p>
+      If you have any questions about your order, please don't hesitate to contact us.
+    </p>
+
+    <p>Thank you for your business!</p>
+  </body>
+</html> 

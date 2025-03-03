@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Order Cancellation Notice</h1>
+    <p>Hello <%= @user.email %>,</p>
+    
+    <p>Your order #<%= @order.id %> has been cancelled.</p>
+
+    <% if @order.refund_amount %>
+      <h2>Refund Information:</h2>
+      <p>
+        A refund of $<%= @order.refund_amount %> has been initiated to your original 
+        payment method. Please allow 5-10 business days for the refund to appear 
+        on your statement.
+      </p>
+    <% end %>
+
+    <h2>Cancelled Order Details:</h2>
+    <ul>
+      <li>Order Total: $<%= @order.total_price %></li>
+      <li>Cancellation Date: <%= @order.updated_at.strftime("%B %d, %Y") %></li>
+      <% if @order.notes.present? %>
+        <li>Cancellation Reason: <%= @order.notes %></li>
+      <% end %>
+    </ul>
+
+    <p>
+      If you have any questions about this cancellation, please don't hesitate 
+      to contact our customer service team.
+    </p>
+
+    <p>We hope to serve you again in the future.</p>
+  </body>
+</html> 
